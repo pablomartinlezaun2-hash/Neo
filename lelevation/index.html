@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>L'ÉLÉVATION | Experiencia Gastronómica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #050505;
+      --text-color: #ffffff;
+      --accent-color: #d4af37;
+      --gray: #888;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', Arial, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: linear-gradient(to bottom, rgba(0,0,0,.65), rgba(0,0,0,0));
+    }
+
+    .logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 2rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.55)),
+        url('https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+    }
+
+    .video-container {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: #050505;
+    }
+
+    .hero-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.45;
+      display: block;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(0,0,0,.1), rgba(0,0,0,.75));
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 0 20px;
+    }
+
+    h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.1;
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .hero-cta .btn {
+      display: inline-block;
+      padding: 1.2rem 2.5rem;
+      background: white;
+      color: black;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.8rem;
+      transition: 0.3s;
+    }
+
+    .hero-cta .btn:hover {
+      background: var(--accent-color);
+      color: #050505;
+    }
+
+    section {
+      padding: 10vh 5%;
+      position: relative;
+    }
+
+    .tag {
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      font-size: 0.7rem;
+      color: var(--gray);
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 4rem);
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .experience-grid {
+      display: flex;
+      gap: 5%;
+      align-items: center;
+    }
+
+    .experience-grid p {
+      max-width: 500px;
+      color: #ccc;
+      line-height: 1.8;
+    }
+
+    .experience-grid img {
+      width: 40%;
+      min-width: 280px;
+      filter: grayscale(1);
+    }
+
+    .menu-horizontal {
+      overflow: hidden;
+    }
+
+    .horizontal-container {
+      display: flex;
+      gap: 2rem;
+      padding: 5vh 0;
+      width: max-content;
+      will-change: transform;
+    }
+
+    .dish-card {
+      width: min(400px, 82vw);
+      height: 500px;
+      background: #111;
+      overflow: hidden;
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .dish-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      transition: 0.5s;
+    }
+
+    .dish-card:hover img {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    .dish-card h3 {
+      font-family: var(--font-heading);
+      font-weight: 400;
+      font-size: 1.5rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+    }
+
+    footer {
+      padding: 5rem 5%;
+      border-top: 1px solid #222;
+      text-align: center;
+      color: #aaa;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .9s ease, transform .9s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 1.3rem 5%; }
+      .logo { font-size: 1.1rem; }
+      .nav-links a { margin-left: 1rem; font-size: .7rem; }
+      .experience-grid { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      .experience-grid img { width: 100%; min-width: 0; }
+      .dish-card { height: 420px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">L'ÉLÉVATION</div>
+    <div class="nav-links">
+      <a href="#menu">Menú</a>
+      <a href="#reservar">Reservar</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="video-container" aria-hidden="true">
+        <video autoplay muted loop playsinline class="hero-video" poster="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600&auto=format&fit=crop">
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-serving-food-in-a-restaurant-3457-large.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="hero-content">
+        <h1 class="reveal">Una experiencia<br>gastronómica exclusiva</h1>
+        <div class="hero-cta">
+          <a href="#reservar" class="btn">Reservar mesa</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="experience fade-in">
+      <span class="tag">Filosofía</span>
+      <h2>El arte culinario elevado a su máxima expresión.</h2>
+      <div class="experience-grid">
+        <p>Cada ingrediente cuenta una historia. Nuestra cocina es un equilibrio entre la tradición ancestral y la vanguardia más atrevida.</p>
+        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=600&auto=format&fit=crop" alt="Plato gastronómico">
+      </div>
+    </section>
+
+    <section id="menu" class="menu-horizontal fade-in">
+      <span class="tag">Destacados</span>
+      <div class="horizontal-container">
+        <div class="dish-card">
+          <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=600&auto=format&fit=crop" alt="Ostras Fine de Claire">
+          <div style="position: absolute; bottom: 20px; left: 20px;"><h3>Ostras Fine de Claire</h3></div>
+        </div>
+        <div class="dish-card">
+          <img src="https://images.unsplash.com/photo-1550966842-28ca3199852c?q=80&w=600&auto=format&fit=crop" alt="Wagyu A5 Kobe">
+          <div style="position: absolute; bottom: 20px; left: 20px;"><h3>Wagyu A5 Kobe</h3></div>
+        </div>
+        <div class="dish-card">
+          <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=600&auto=format&fit=crop" alt="Mixología de Autor">
+          <div style="position: absolute; bottom: 20px; left: 20px;"><h3>Mixología de Autor</h3></div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="reservar">
+      <p>© 2024 L'ÉLÉVATION | Madrid · Paris · Tokyo</p>
+    </footer>
+  </main>
+
+  <script>
+    const reveal = document.querySelector('.reveal');
+    requestAnimationFrame(() => {
+      reveal.style.transition = 'opacity 1.2s ease, transform 1.2s ease';
+      reveal.style.opacity = '1';
+      reveal.style.transform = 'translateY(0)';
+    });
+    reveal.style.opacity = '0';
+    reveal.style.transform = 'translateY(80px)';
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    const horizontal = document.querySelector('.horizontal-container');
+    const menuSection = document.querySelector('.menu-horizontal');
+
+    function updateHorizontalScroll() {
+      if (!horizontal || !menuSection) return;
+      const rect = menuSection.getBoundingClientRect();
+      const sectionHeight = menuSection.offsetHeight + window.innerHeight;
+      const progress = Math.min(Math.max((window.innerHeight - rect.top) / sectionHeight, 0), 1);
+      const maxTranslate = Math.max(horizontal.scrollWidth - window.innerWidth + 80, 0);
+      horizontal.style.transform = `translateX(${-progress * maxTranslate}px)`;
+    }
+
+    window.addEventListener('scroll', updateHorizontalScroll, { passive: true });
+    window.addEventListener('resize', updateHorizontalScroll);
+    updateHorizontalScroll();
+  </script>
+</body>
+</html>
