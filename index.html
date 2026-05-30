@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FitPulse - Tu App Fitness</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <h1>FitPulse</h1>
+      <p>Planifica entrenamientos, registra progreso y mantente constante.</p>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>Registrar entrenamiento</h2>
+        <form id="workout-form">
+          <label>
+            Tipo
+            <select id="type" required>
+              <option value="Fuerza">Fuerza</option>
+              <option value="Cardio">Cardio</option>
+              <option value="Movilidad">Movilidad</option>
+            </select>
+          </label>
+          <label>
+            Duración (min)
+            <input id="duration" type="number" min="1" required />
+          </label>
+          <label>
+            Calorías (aprox.)
+            <input id="calories" type="number" min="0" required />
+          </label>
+          <button type="submit">Añadir sesión</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Resumen semanal</h2>
+        <div class="stats">
+          <p><strong id="sessions">0</strong> sesiones</p>
+          <p><strong id="minutes">0</strong> minutos</p>
+          <p><strong id="kcal">0</strong> kcal</p>
+        </div>
+        <ul id="workout-list" class="list"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Calculadora IMC</h2>
+        <form id="bmi-form">
+          <label>
+            Peso (kg)
+            <input id="weight" type="number" min="1" step="0.1" required />
+          </label>
+          <label>
+            Altura (m)
+            <input id="height" type="number" min="0.5" max="2.5" step="0.01" required />
+          </label>
+          <button type="submit">Calcular</button>
+        </form>
+        <p id="bmi-result" class="result">Introduce tus datos para ver tu IMC.</p>
+      </section>
+    </main>
+
+    <footer>
+      <button id="reset" class="danger">Reiniciar datos</button>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
